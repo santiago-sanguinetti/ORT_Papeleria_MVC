@@ -1,0 +1,31 @@
+﻿@model IEnumerable<Papeleria_MVC.Models.SummaryViewModel>
+
+@{
+    ViewData["Title"] = "Resumen de Movimientos de Stock por Año y Tipo de Movimiento";
+}
+
+<h2>@ViewData["Title"]</h2>
+
+@if (Model != null && Model.Any())
+{
+    foreach (var item in Model)
+    {
+        <h3>Año: @item.year</h3>
+        @if (item.movements != null && item.movements.Any())
+        {
+            foreach (var movement in item.movements)
+            {
+                <p>Tipo: @movement.movementTypeName - Cantidad: @movement.totalQuantity</p>
+            }
+        }
+        else
+        {
+            <p>No se encontraron movimientos para este año.</p>
+        }
+        <p><strong>Total año @item.year: @item.yearTotal</strong></p>
+    }
+}
+else
+{
+    <p>No se encontraron datos para mostrar.</p>
+}

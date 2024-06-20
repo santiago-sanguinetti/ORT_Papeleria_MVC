@@ -1,0 +1,64 @@
+﻿@model Papeleria_MVC.Models.CreateStockMovementViewModel
+
+@{
+    ViewData["Title"] = "Create";
+    var maxItemQuantity = 0;
+    if (TempData["MaxItemQuantity"] != null)
+    {
+        maxItemQuantity = (int)TempData["MaxItemQuantity"];
+    }
+
+}
+
+<h1>Create</h1>
+<partial name ="_Messages" />
+<h4>CreateStockMovementViewModel</h4>
+<hr />
+<div class="row">
+    <div class="col-md-4">
+        <form asp-action="Create">
+            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+            <div class="form-group">
+                <label asp-for="ItemId" class="control-label"></label>
+                <select asp-for="ItemId" class="form-select">
+                    <option value="">Selecciona un artículo</option>
+                    @foreach (var item in Model.Items)
+                    {
+                        <option value="@item.Value">@item.Text</option>
+                    }</select>
+                @* <input asp-for="ItemId" class="form-control" /> *@
+                <span asp-validation-for="ItemId" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="MovementTypeId" class="control-label"></label>
+                <select asp-for="MovementTypeId" class="form-select">
+                    <option value="">Selecciona un tipo de movimiento</option>
+                    @foreach (var movementType in Model.MovementTypes)
+                    {
+                        <option value="@movementType.Value">@movementType.Text</option>
+                    }
+                </select>
+                @* <input asp-for="MovementTypeId" class="form-control" /> *@
+                <span asp-validation-for="MovementTypeId" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="ItemQuantity" class="control-label"></label>
+                <input asp-for="ItemQuantity" class="form-control" data-val-range-min="1" data-val-range-max="@maxItemQuantity" />
+                <span asp-validation-for="ItemQuantity" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="ResponsibleUserId" class="control-label"></label>
+                <input asp-for="ResponsibleUserId" class="form-control" />
+                <span asp-validation-for="ResponsibleUserId" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <input type="submit" value="Create" class="btn btn-primary" />
+            </div>
+        </form>
+    </div>
+</div>
+
+<div>
+    <a asp-action="Index">Back to List</a>
+</div>
+

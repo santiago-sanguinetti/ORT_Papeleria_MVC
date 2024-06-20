@@ -1,0 +1,70 @@
+﻿@model IEnumerable<Papeleria_MVC.Models.ItemByMovementTypeModel>
+
+@{
+    ViewData["Title"] = "GetByArticleAndMovementTypeIndex";
+}
+
+<h1>GetByArticleAndMovementTypeIndex</h1>
+
+@if (Model != null && Model.Any())
+{
+    <table class="table">
+        <thead>
+            <tr>
+                <th>
+                    @Html.DisplayNameFor(model => model.id)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.date)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.itemId)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.movementTypeId)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.itemQuantity)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.responsibleUserId)
+                </th>
+                <th></th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var item in Model)
+            {
+                <tr>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.id)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.date)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.itemId)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.movementTypeId)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.itemQuantity)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.responsibleUserId)
+                    </td>
+                    <td>
+                        @Html.ActionLink("Edit", "Edit", new { /* id=item.PrimaryKey */ }) |
+                        @Html.ActionLink("Details", "Details", new { /* id=item.PrimaryKey */ }) |
+                        @Html.ActionLink("Delete", "Delete", new { /* id=item.PrimaryKey */ })
+                    </td>
+                </tr>
+            }
+        </tbody>
+    </table>
+}
+else
+{
+    <p>No se encontraron datos para mostrar.</p>
+}

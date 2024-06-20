@@ -1,3 +1,5 @@
+using Papeleria_MVC.Middlewares;
+
 namespace Papeleria_MVC
 {
     public class Program
@@ -5,10 +7,14 @@ namespace Papeleria_MVC
         public static void Main(string[] args)
         {
             var builder = WebApplication.CreateBuilder(args);
-
+            builder.Services.AddSession();
             // Add services to the container.
             builder.Services.AddControllersWithViews();
 
+            
+            // Configuración del cliente HTTP
+            builder.Services.AddHttpClient();
+            
             var app = builder.Build();
 
             // Configure the HTTP request pipeline.
@@ -24,11 +30,17 @@ namespace Papeleria_MVC
 
             app.UseRouting();
 
+            app.UseSession();
+
+            app.UseAuthentication();
             app.UseAuthorization();
+            
 
             app.MapControllerRoute(
                 name: "default",
                 pattern: "{controller=Home}/{action=Index}/{id?}");
+
+            
 
             app.Run();
         }
